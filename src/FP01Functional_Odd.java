@@ -9,7 +9,8 @@ public class FP01Functional_Odd {
     }
 
     private static void publicFunctionalOddListAllNumbers(List<Integer> numbers) {
-        numbers.stream().filter(number->number%2==1).forEach(System.out::println);
+        numbers.stream().filter(number->number%2==1).
+                forEach(System.out::println);
 
     }
 }

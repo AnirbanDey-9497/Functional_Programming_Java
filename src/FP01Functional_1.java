@@ -5,11 +5,11 @@ import java.util.List;
 public class FP01Functional_1 {
 
     public static void main(String[] args) {
-        publicFunctionalListOfNumbers(List.of(12,34,4,56,78,9,2,43,123,23));
+        List<String> courses = List.of("Spring","Spring Boot","API","Microservices","AWS","PCF","Azure","Docker","Kubernetes");
+        publicListAllDefinedStrings(courses);
     }
 
-    private static void publicFunctionalListOfNumbers(List<Integer> numbers) {
-        numbers.stream().forEach(System.out::println);
+    private static void publicListAllDefinedStrings(List<String> courses) {
+        courses.stream().map(course->course+" "+course.length()).forEach(System.out::println);
     }
 }
-
