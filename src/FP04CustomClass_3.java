@@ -1,17 +1,20 @@
 package src;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-class Course_2 {
+class Course_3 {
     private String name;
     private String Category;
     private int reviewScore;
     private int noOfStudents;
 
-    public Course_2(String name, String category, int reviewScore, int noOfStudents) {
+    public Course_3(String name, String category, int reviewScore, int noOfStudents) {
         this.name = name;
         Category = category;
         this.reviewScore = reviewScore;
@@ -57,7 +60,7 @@ class Course_2 {
     }
 }
 
-public class FP04CustomClass_2 {
+public class FP04CustomClass_3 {
 
     public static void main(String[] args) {
 
@@ -71,7 +74,7 @@ public class FP04CustomClass_2 {
                 new Course_2("Docker","Cloud",92,82000),
                 new Course_2("Kubernetes","Cloud",94,12000));
 
-      //  System.out.println(cours.stream().allMatch(reviewscoreLessThan90CoursePredicate()));
+        //  System.out.println(cours.stream().allMatch(reviewscoreLessThan90CoursePredicate()));
 
         Comparator<Course_2> comparingByNoOfStudents= Comparator.comparing(Course_2::getNoOfStudents);
         Comparator<Course_2> comparingByNoOfStudentsIncreasing= Comparator.comparing(Course_2::getNoOfStudents).reversed();
@@ -122,6 +125,28 @@ public class FP04CustomClass_2 {
         System.out.println(cours.stream().collect(Collectors.groupingBy(Course_2::getCategory, Collectors.maxBy(Comparator.comparing(Course_2::getReviewScore)))));
 
         System.out.println(cours.stream().collect(Collectors.groupingBy(Course_2::getCategory, Collectors.mapping(Course_2::getName,Collectors.toList()))));
+
+        //Making streams directly
+
+        System.out.println(Stream.of(12,45,89,8,5,8,9,78, 123).count());
+
+        System.out.println(Stream.of(12,45,89,8,5,8,9,78, 123).reduce(0, Integer::sum));
+
+        int[] numberArray = {12,45,89,8,5,8,9,78, 123};
+
+        System.out.println(Arrays.stream(numberArray).average());
+
+        //Doesn't take the last element
+
+        System.out.println(IntStream.range(1,10).sum());
+
+        //Takes the last Element
+
+        System.out.println(IntStream.rangeClosed(1,10).sum());
+
+        //Generate specific set of values
+        System.out.println();
+
     }
 
     private static Predicate<Course_2> reviewscoreGreaterThan90CoursePredicate() {
