@@ -80,6 +80,39 @@ public class FP04CustomClass_2 {
         Comparator<Course_2> comparingByNoOfStudentsAndReview= Comparator.comparing(Course_2::getNoOfStudents).thenComparing(Course_2::getReviewScore).reversed();
 
         System.out.println(cours.stream().sorted(comparingByNoOfStudentsAndReview).collect(Collectors.toList()));
+        System.out.println(cours.stream().sorted(comparingByNoOfStudentsAndReview).limit(5).collect(Collectors.toList()));
+        System.out.println(cours.stream().sorted(comparingByNoOfStudentsAndReview).skip(5).collect(Collectors.toList()));
+        System.out.println(cours.stream().sorted(comparingByNoOfStudentsAndReview).skip(5).limit(4).collect(Collectors.toList()));
+
+
+        //Return all the elements of the list until the elements do not meet a specific criteria
+
+        System.out.println(cours.stream().takeWhile(course2 -> course2.getReviewScore()>94).collect(Collectors.toList()));
+
+        //As long as a particular condition is true it skips the elements
+        System.out.println(cours.stream().dropWhile(course2 -> course2.getReviewScore()>94).collect(Collectors.toList()));
+
+        //Which is the top course when we are comparing by the no of students and reviews
+        System.out.println(cours.stream().max(comparingByNoOfStudentsAndReview));
+
+        //How to return something if it doesn't find a default
+        System.out.println(cours.stream().filter(reviewscoreLessThan90CoursePredicate())
+                .min(comparingByNoOfStudentsAndReview).orElse(new Course_2("Kubernetes","Cloud",94,12000)));
+
+        //Filter elements by predicate and then find the first element which meets specific criteria
+        System.out.println(cours.stream().filter(reviewscoreGreaterThan90CoursePredicate()).findFirst());
+
+        //Return any of the elements of the list which match the specific criteria
+        System.out.println(cours.stream().filter(reviewscoreGreaterThan95CoursePredicate()).findAny());
+
+
+        System.out.println(cours.stream().filter(reviewscoreGreaterThan95CoursePredicate()).mapToInt(Course_2->Course_2.getNoOfStudents()).sum());
+
+        System.out.println(cours.stream().filter(reviewscoreGreaterThan95CoursePredicate()).mapToInt(Course_2->Course_2.getNoOfStudents()).average());
+
+        System.out.println(cours.stream().filter(reviewscoreGreaterThan95CoursePredicate()).mapToInt(Course_2->Course_2.getNoOfStudents()).count());
+
+        System.out.println(cours.stream().filter(reviewscoreGreaterThan95CoursePredicate()).mapToInt(Course_2->Course_2.getNoOfStudents()).max());
 
     }
 
